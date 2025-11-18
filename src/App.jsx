@@ -1,43 +1,96 @@
 // src/App.jsx
-import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './context/AuthContext';
+import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider, useAuth } from "./context/AuthContext";
 // --- Páginas Públicas ---
-import HomePage from './pages/home/HomePage';
-import LoginPage from './pages/Auth/Login';
+import HomePage from "./pages/Home/HomePage";
+import LoginPage from "./pages/Auth/Login";
 
 // --- Páginas Privadas ---
-import DashboardPage from './pages/Dashboard/DashboardPage';
+import DashboardPage from "./pages/Dashboard/DashboardPage";
+
+import ReportsLayout from "./pages/Reports/ReportsLayout";
+import VentasReportUploader from "./pages/Reports/VentasReportUploader";
+import LegalReportUploader from "./pages/Reports/LegalReportUploader";
+// (Crearemos este placeholder)
+const CarteraReportUploader = () => <div>Módulo de Carga de Cartera</div>;
+import Centrales from './pages/Reports/Centrales';
 
 // --- Placeholders para las nuevas rutas del Sidebar ---
 // (Importamos el layout solo para los placeholders)
-import AuthenticatedLayout from './components/layout/AuthenticatedLayout';
-
-const UserAdminPage = () => <AuthenticatedLayout header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Gestión de Usuarios</h2>}><div>Contenido de Gestión de Usuarios</div></AuthenticatedLayout>;
-const RolesAdminPage = () => <AuthenticatedLayout header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Gestión de Roles</h2>}><div>Contenido de Gestión de Roles</div></AuthenticatedLayout>;
-const ReportsPage = () => <AuthenticatedLayout header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Reportes</h2>}><div>Contenido de Reportes</div></AuthenticatedLayout>;
-const DocumentsPage = () => <AuthenticatedLayout header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Documentos</h2>}><div>Contenido de Documentos</div></AuthenticatedLayout>;
-const InventoryPage = () => <AuthenticatedLayout header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Inventario</h2>}><div>Contenido de Inventario</div></AuthenticatedLayout>;
-const CarteraPage = () => <AuthenticatedLayout header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Cartera</h2>}><div>Contenido de Cartera</div></AuthenticatedLayout>;
-const HelpDeskPage = () => <AuthenticatedLayout header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Mesa de Ayuda</h2>}><div>Contenido de Mesa de Ayuda</div></AuthenticatedLayout>;
-
-// (Componente provisional para Soporte - necesita importarse desde GuestLayout)
-import GuestLayout from './components/layout/GuestLayout';
-const SoportePage = () => <GuestLayout><div>Página de Soporte</div></GuestLayout>;
-
-
-// --- Componentes Provisionales (Solo queda el Dashboard) ---
-const Dashboard = () => {
-  const { user, logout } = useAuth();
-  return (
-    <div>
-      <h1>Dashboard - ¡Bienvenido, {user?.name}!</h1>{" "}
-      {/* Usamos ? por si user es null */}
-      <button onClick={logout}>Cerrar Sesión</button>
-    </div>
-  );
-};
-// --- Fin de Componentes Provisionales ---
+import AuthenticatedLayout from "./components/Layout/AuthenticatedLayout";
+const UserAdminPage = () => (
+  <AuthenticatedLayout
+    header={
+      <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+        Gestión de Usuarios
+      </h2>
+    }
+  >
+    <div>Contenido de Gestión de Usuarios</div>
+  </AuthenticatedLayout>
+);
+const RolesAdminPage = () => (
+  <AuthenticatedLayout
+    header={
+      <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+        Gestión de Roles
+      </h2>
+    }
+  >
+    <div>Contenido de Gestión de Roles</div>
+  </AuthenticatedLayout>
+);
+const DocumentsPage = () => (
+  <AuthenticatedLayout
+    header={
+      <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+        Documentos
+      </h2>
+    }
+  >
+    <div>Contenido de Documentos</div>
+  </AuthenticatedLayout>
+);
+const InventoryPage = () => (
+  <AuthenticatedLayout
+    header={
+      <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+        Inventario
+      </h2>
+    }
+  >
+    <div>Contenido de Inventario</div>
+  </AuthenticatedLayout>
+);
+const CarteraPage = () => (
+  <AuthenticatedLayout
+    header={
+      <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+        Cartera
+      </h2>
+    }
+  >
+    <div>Contenido de Cartera</div>
+  </AuthenticatedLayout>
+);
+const HelpDeskPage = () => (
+  <AuthenticatedLayout
+    header={
+      <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+        Mesa de Ayuda
+      </h2>
+    }
+  >
+    <div>Contenido de Mesa de Ayuda</div>
+  </AuthenticatedLayout>
+);
+import GuestLayout from "./components/Layout/GuestLayout";
+const SoportePage = () => (
+  <GuestLayout>
+    <div>Página de Soporte</div>
+  </GuestLayout>
+);
 
 function ProtectedRoute({ children }) {
   const { token } = useAuth();
@@ -56,27 +109,113 @@ function GuestRoute({ children }) {
   return children;
 }
 
-// 4. El "Router" principal
 function AppRoutes() {
   return (
-     <Routes>
-      {/* Rutas Públicas (Solo para Invitados) */}
-      <Route path="/" element={<GuestRoute><HomePage /></GuestRoute>} />
-      <Route path="/login" element={<GuestRoute><LoginPage /></GuestRoute>} />
-      <Route path="/soporte" element={<GuestRoute><SoportePage /></GuestRoute>} />
+    <Routes>
+      {/* Rutas Públicas */}
+      <Route
+        path="/"
+        element={
+          <GuestRoute>
+            <HomePage />
+          </GuestRoute>
+        }
+      />
+      <Route
+        path="/login"
+        element={
+          <GuestRoute>
+            <LoginPage />
+          </GuestRoute>
+        }
+      />
+      <Route
+        path="/soporte"
+        element={
+          <GuestRoute>
+            <SoportePage />
+          </GuestRoute>
+        }
+      />
 
-      {/* Rutas Privadas (Requieren Login) */}
-      <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} /> 
-      
-      {/* 2. 👇 ¡Añadimos todas las rutas del Sidebar! */}
-      <Route path="/admin/usuarios" element={<ProtectedRoute><UserAdminPage /></ProtectedRoute>} />
-      <Route path="/admin/roles" element={<ProtectedRoute><RolesAdminPage /></ProtectedRoute>} />
-      <Route path="/reportes" element={<ProtectedRoute><ReportsPage /></ProtectedRoute>} />
-      <Route path="/documentos" element={<ProtectedRoute><DocumentsPage /></ProtectedRoute>} />
-      <Route path="/inventario" element={<ProtectedRoute><InventoryPage /></ProtectedRoute>} />
-      <Route path="/cartera" element={<ProtectedRoute><CarteraPage /></ProtectedRoute>} />
-      <Route path="/mesa-de-ayuda" element={<ProtectedRoute><HelpDeskPage /></ProtectedRoute>} />
-      
+      {/* Rutas Privadas */}
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <DashboardPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/reportes"
+        element={
+          <ProtectedRoute>
+            <ReportsLayout />
+          </ProtectedRoute>
+        }
+      >
+        {/* Esta es la ruta por defecto (ej. /reportes), redirige al primer tab */}
+        <Route index element={<Navigate to="ventas" replace />} />
+
+        {/* Estas rutas se renderizan DENTRO del <Outlet> de ReportsLayout */}
+        <Route path="ventas" element={<VentasReportUploader />} />
+        <Route path="legal" element={<LegalReportUploader />} />
+        <Route path="cartera" element={<CarteraReportUploader />} />
+        <Route path="centrales" element={<Centrales />} />
+      </Route>
+
+      {/* (Otras rutas privadas) */}
+      <Route
+        path="/admin/usuarios"
+        element={
+          <ProtectedRoute>
+            <UserAdminPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/roles"
+        element={
+          <ProtectedRoute>
+            <RolesAdminPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/documentos"
+        element={
+          <ProtectedRoute>
+            <DocumentsPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/inventario"
+        element={
+          <ProtectedRoute>
+            <InventoryPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/cartera"
+        element={
+          <ProtectedRoute>
+            <CarteraPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/mesa-de-ayuda"
+        element={
+          <ProtectedRoute>
+            <HelpDeskPage />
+          </ProtectedRoute>
+        }
+      />
+
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

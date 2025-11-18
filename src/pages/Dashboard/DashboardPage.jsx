@@ -1,6 +1,6 @@
 import React from "react";
 // 1. 👇 ¡CAMBIO CLAVE! Importamos el NUEVO layout y el NUEVO hook
-import AuthenticatedLayout from "../../components/layout/AuthenticatedLayout";
+import AuthenticatedLayout from "../../components/Layout/AuthenticatedLayout";
 import { useAuth } from "../../context/AuthContext";
 
 // 2. ❌ 'Head' de Inertia eliminado

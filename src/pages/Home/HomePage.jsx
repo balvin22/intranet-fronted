@@ -1,6 +1,6 @@
 import React from 'react';
 // 1. Importaciones cambiadas (ya no usan '@/' de Inertia)
-import GuestLayout from '../../components/layout/GuestLayout';
+import GuestLayout from '../../components/Layout/GuestLayout';
 import AreaCard from '../../components/UI/AreaCard';
 import { FaChartLine, FaHandshake, FaMoneyBillWave, FaUsers, FaCalculator, FaBuilding, FaGlobe, FaBriefcase, FaCode, FaMapMarkerAlt } from 'react-icons/fa';
 
