@@ -13,7 +13,6 @@ import TextInput from '../../components/UI/TextInput';
 const API_REGISTER_URL = 'http://localhost:8001/api/users';
 
 export default function RegisterPage() {
-    // 3. Reemplaza 'useForm' (Inertia) con 'useState' (React)
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -31,15 +30,12 @@ export default function RegisterPage() {
 
         try {
             await axios.post(API_REGISTER_URL, {
-                // ⚠️ ¡OJO! Esto fallará (ver mi explicación abajo)
-                // Tu API espera 'name_user', 'last_name_user', 'role_name', etc.
-                // Estamos enviando solo los campos de tu formulario antiguo.
                 name_user: name,
                 email: email,
                 password: password,
                 password_confirmation: passwordConfirmation,
 
-                // --- CAMPOS FALTANTES QUE TU API REQUIERE ---
+                // --- CAMPOS FALTANTES ---
                 // last_name_user: '...valor...'
                 // number_document: '...valor...'
                 // company_id: 1,
@@ -66,9 +62,6 @@ export default function RegisterPage() {
 
     return (
         <GuestLayout>
-            {/* 5. Tu JSX (casi sin cambios) */}
-            {/* ❌ <Head> eliminado */}
-
             <form onSubmit={submit} className="w-full max-w-md p-8 mx-auto">
                 <div>
                     <InputLabel htmlFor="name" value="Name" />

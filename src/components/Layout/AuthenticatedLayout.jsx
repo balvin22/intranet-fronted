@@ -1,8 +1,8 @@
 import React from 'react';
-import Sidebar from './Sidebar'; // Importamos el Sidebar que acabamos de refactorizar
+import Sidebar from './Sidebar'; // Importamos el Sidebar
 import { useAuth } from '../../context/AuthContext';
 
-// Acepta 'header' (para el título) y 'children' (para el contenido)
+// Acepta 'header' y 'children'
 export default function AuthenticatedLayout({ header, children }) {
     const { user } = useAuth(); // Obtenemos el usuario para el TopNav
 
@@ -11,7 +11,6 @@ export default function AuthenticatedLayout({ header, children }) {
             {/* 1. Barra Lateral (Sidebar) */}
             <div className="hidden md:flex md:flex-shrink-0">
                 <div className="flex flex-col w-64">
-                    {/* Usamos el Sidebar refactorizado */}
                     <Sidebar />
                 </div>
             </div>

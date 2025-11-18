@@ -6,8 +6,6 @@ import Nav from './Nav';
 export default function GuestLayout({ children }) {
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
-      
-      {/* 4. 👇 ¡REEMPLAZA el <nav> antiguo por el nuevo componente! */}
       <Nav />
 
       {/* Contenido Principal de la Página */}

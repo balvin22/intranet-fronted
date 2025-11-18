@@ -13,7 +13,6 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token"));
 
-  // 4. 👇 ¡ESTE ES EL HOOK CORREGIDO! 👇
   // Este hook se ejecutará cada vez que la app cargue, o cuando el 'token' cambie.
   useEffect(() => {
     const fetchUser = async () => {
@@ -37,7 +36,6 @@ export function AuthProvider({ children }) {
     } else {
       localStorage.removeItem("token");
       delete axios.defaults.headers.common["Authorization"];
-      // setUser(null) removed to avoid cascading renders
     }
   }, [token]);
 
@@ -69,7 +67,7 @@ export function AuthProvider({ children }) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
-// 8. Hook personalizado (sin cambios)
+// 8. Hook personalizado
 // eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
   return useContext(AuthContext);

@@ -52,15 +52,13 @@ export default function LoginPage() {
     return <Navigate to="/dashboard" replace />;
   }
 
-  // 7. Este es TU JSX visual (casi sin cambios)
+  // 7. Este es TU JSX visual
   return (
     <>
-      {/* ❌ <GuestLayout> y <Head> eliminados */}
-
       <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <video
           className="absolute top-0 left-0 w-full h-full object-cover saturate-125 contrast-110 brightness-105"
-          src="/videos/intranet-bg.mp4" // 👈 Esto ya funciona
+          src="/videos/intranet-bg.mp4"
           autoPlay
           muted
           loop
@@ -82,7 +80,6 @@ export default function LoginPage() {
               {error}
             </div>
           )}
-          {/* ❌ {status && ...} eliminado */}
 
           <form onSubmit={submit}>
             <div className="mb-6">
@@ -95,15 +92,14 @@ export default function LoginPage() {
                   id="email"
                   type="email"
                   name="email"
-                  value={email} // 👈 9. Conectado a 'useState'
+                  value={email} // 
                   className="w-full pl-10 pr-4 py-3 border rounded-xl bg-white/15 text-white placeholder-indigo-200 focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 shadow-sm transition border-white/20"
                   placeholder="tu@correo.com"
                   autoComplete="username"
-                  onChange={(e) => setEmail(e.target.value)} // 👈 9. Conectado a 'useState'
+                  onChange={(e) => setEmail(e.target.value)} 
                   required
                 />
               </div>
-              {/* ❌ {errors.email && ...} eliminado (se maneja con un solo error) */}
             </div>
 
             <div className="mb-8">
@@ -116,24 +112,23 @@ export default function LoginPage() {
                   id="password"
                   type="password"
                   name="password"
-                  value={password} // 👈 9. Conectado a 'useState'
+                  value={password} // '
                   className="w-full pl-10 pr-4 py-3 border rounded-xl bg-white/15 text-white placeholder-indigo-200 focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 shadow-sm transition border-white/20"
                   placeholder="••••••••"
                   autoComplete="current-password"
-                  onChange={(e) => setPassword(e.target.value)} // 👈 9. Conectado a 'useState'
+                  onChange={(e) => setPassword(e.target.value)}
                   required
                 />
               </div>
-              {/* ❌ {errors.password && ...} eliminado */}
             </div>
 
             <div>
               <button
                 type="submit"
                 className="w-full flex items-center justify-center px-6 py-3 border border-transparent text-base font-bold rounded-xl shadow-lg text-white bg-indigo-600 hover:bg-indigo-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400 transition duration-200 disabled:opacity-50"
-                disabled={processing} // 👈 9. Conectado a 'useState'
+                disabled={processing} 
               >
-                {processing ? ( // 👈 9. Conectado a 'useState'
+                {processing ? ( 
                   <>
                     <svg
                       className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"

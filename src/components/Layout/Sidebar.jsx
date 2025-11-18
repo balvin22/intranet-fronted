@@ -14,7 +14,7 @@ import {
     ChartBarIcon, 
 } from '@heroicons/react/24/outline'; 
 
-// 2. 👇 Componente NavItem refactorizado para React Router
+// 2. Componente NavItem refactorizado para React Router
 const NavItem = ({ to, children, icon }) => {
     return (
         <RouterNavLink 
@@ -48,13 +48,13 @@ const hasAnyRole = (userRoles, rolesRequired) => {
 // Componente Principal Sidebar
 export default function Sidebar({ primaryColor = 'bg-indigo-700' }) {
     
-    // 4. 👇 ¡CAMBIO CLAVE! Usamos el AuthContext
+    // 4. ¡CAMBIO CLAVE! Usamos el AuthContext
     const { user, logout } = useAuth();
     
     // Obtenemos los roles del usuario de nuestro contexto
     const userRoles = user ? user.roles : []; 
     
-    // 5. 👇 ¡CORRECCIÓN! Tus roles de Spatie están en mayúscula
+    // 5. Tus roles de Spatie están en mayúscula
     const ROL_ADMINISTRADOR = 'Administrador';
     const ROL_GESTOR = 'Gestor';
     const ROL_ADMINISTRATIVO = 'Administrativo';
@@ -85,7 +85,7 @@ export default function Sidebar({ primaryColor = 'bg-indigo-700' }) {
                 )}
 
                 {/* === GESTIÓN (ROLES: Administrador, Gestor) === */}
-                {/* 7. 👇 ¡MEJOR PRÁCTICA! (Opcional)
+                {/* 7. ¡MEJOR PRÁCTICA! (Opcional)
                    También podrías validar por PERMISO, así:
                    {user.permissions.includes('ver reportes') && ( ... )}
                 */}
