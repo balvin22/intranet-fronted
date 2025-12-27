@@ -18,7 +18,7 @@ export function AuthProvider({ children }) {
     const fetchUser = async () => {
       try {
         // 3. Ahora solo necesitas llamar a '/me', no a la URL completa
-        const response = await axios.get("/me");
+        const response = await axios.get("auth/me");
         setUser(response.data);
       } catch (error) {
         console.error("Token inválido o expirado. Cerrando sesión.", error);
@@ -42,7 +42,7 @@ export function AuthProvider({ children }) {
   const login = async (email, password) => {
     try {
       // 4. Ahora solo necesitas llamar a '/users/login'
-      const response = await axios.post("/users/login", {
+      const response = await axios.post("/auth/login", {
         email,
         password,
       });
